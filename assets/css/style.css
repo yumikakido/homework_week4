@@ -50,6 +50,10 @@ header {
   padding: 40px 40px;
 }
 
+#start_msg {
+  line-height: 1.5;
+}
+
 .quiz_box {
   min-height: 100px;
   text-align: center;
@@ -85,15 +89,14 @@ header {
   margin-left: 10px;
 }
 
-.quiz_box .timer_text {
+.quiz_box  #timer_text {
   font-weight: bolder;
   font-size: 15px;
 }
 
-.quiz_box .timer_sec {
+.quiz_box #timer_sec {
  font-size: 15px;
  font-weight: bold;
-
 }
 
 .quiz-btn {
@@ -105,17 +108,15 @@ header {
   background: #fff;
 }
 
-.quiz_box section .question_text {
-  font-size: 20px;
-  font-weight: bold;
-}
+#box_content {
+  display: none;
+} 
 
-.quiz_box section .option_list {
+.option_list {
  padding: 20px 0;
- display: block 
 }
 
-.quiz_box section .option_list .option {
+.option_list .option {
   font-size: 15px;
   background: aliceblue;
   border: 1px solid #84c5fe;
@@ -127,11 +128,11 @@ header {
   width: 200px;
 }
 
-.quiz_box section .option:hover {
-  background: blue;
+.option:hover {
+  background: #35a0fd
 }
 
-.quiz_box section .option:last-child {
+.option:last-child {
   margin-bottom: 0px;
 }
 
@@ -142,11 +143,16 @@ header {
   color: hsl(0, 0%, 100%);
   display: inline-block;
   font-size: 15px;
+  font-weight: bold;
   line-height: 15px;
   margin: 16px 16px 16px 20px;
   padding: 14px 24px;
   text-align: center;
   cursor: pointer;
+}
+
+.btn[disabled] {
+  cursor: default;
 }
 
 .result_box {
