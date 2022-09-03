@@ -7,11 +7,15 @@
     <title>Coding Quiz Challenge</title>
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+
   <body>
     <div class="wrapper">
       <div class="container">
 
-        <div class="quiz_box">
+        <!-- main box -->
+        <div class="main_box">
+
+          <!-- header -->
           <header>
             <h1>Coding Quiz Challenge</h1>
             <div class="timer">
@@ -19,32 +23,35 @@
               <div id="timer_sec"></div>       
           </header>
 
-          <section>
+          <!-- section -->
+          <section id = main_section>
             <p id = start_msg>Try to answer the following code-related questions within 60 seconds.<br>Please keep in mind that incorrect answers will penalize your score/time by 10 seconds.<br>If you are ready, click on "Start quiz"!</p> 
             
-            <div id = box_content>
-              <div class="question"><span>What does CSS stand for?</span></div>
-              <div class="option_list">
-                <div class="option"><span>1. AAAAAA</span></div>
-                <div class="option"><span>2. BBBBBB</span></div>
-                <div class="option"><span>3. CCCCCC</span> </div>
-                <div class="option"><span>4. DDDDDD</span></div>
-              </div>
-             </div> 
-
-            <div class="quiz-btn">
-              <button id="start_btn" class="btn">Start quiz</button>
+            <!-- answer btn -->
+            <div id="answer_box">
+              <button type = "button" id="answer_btn" class="btn">1. Button</button>
+              <button type = "button" id="answer_btn" class="btn">2. Button</button>
+              <button type = "button" id="answer_btn" class="btn">3. Button</button>
+              <button type = "button" id= "answer_btn" class="btn">4. Button</button>
             </div>
+            
+             <!-- save initials and score -->
+             <form method="POST">
+             <div class="result_box">
+                <div class="complete_text">All done! Your final score is:  </div>
+                <label for="initials">Enter initials: </label><input type="text" name="initials" id="initials" placeholder="JD" />
+                <button id="submit">Submit</button>
+              </div>
+              </form>
+              
+            <!-- start button -->
+            <div class="Start_btn"><button id="start_btn" class="btn">Start quiz</button></div>
+              
+            <!-- goBack button -->
+            <div class="GoBack_btn"><button id="goBack_btn" class="btn">Go back</button></div>
+
           </section>
-
         </div>
-        <!-- result box -->
-        <!-- <div class="result_box">
-        <div class="complete_text">All done!</div>
-        <div class="score_text">Your final score is</div>
-
-        </div>
-       -->
       </div>
     </div>
     <script src="assets/js/script.js"></script>
