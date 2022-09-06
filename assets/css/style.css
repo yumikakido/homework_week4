@@ -148,12 +148,11 @@ header {
 }
 
 #initialsAndScore_box {
-    padding: 8px;
+    padding: 12px;
     font-size: 14px;
     border: solid 1px #000000;
     display: none;
 }
-
 
 #goBack_btn {
   border: none;
