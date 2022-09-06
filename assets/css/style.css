@@ -96,10 +96,6 @@ header {
  font-weight: bold;
 }
 
-.quiz-btn {
-  text-align: center;
-}
-
 .main_box section {
   padding: 25px 30px 20px 30px;
   background: #fff;
@@ -181,10 +177,6 @@ header {
   text-align: center;
   cursor: pointer;
   display: none;
-}
-
-#start_btn[disabled] {
-  cursor: default;
 }
 
 #initial_box {

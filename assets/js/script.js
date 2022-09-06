@@ -8,11 +8,18 @@ var clearButton = document.getElementById('clear_btn');
 var initialsAndScoreBoxEl = document.getElementById('initialsAndScore_box');
 var startMsg = document.getElementById('start_msg');
 var isCorrect = document.getElementById('correct');
+var totalScore = document.getElementById('score');
+
+var timeLeft = 30;
+var score = 0; 
 
 // Game starts(= timer starts, questions are displayed and start_msg disappears) when start_btn is clicked
 startButton.addEventListener('click', startGame)
 
 function startGame() {
+	timeLeft = 30
+	score = 0
+	timerEl.textContent = `${timeLeft}`
 	countdown()
 	firstQuestion()
 	displayAnswerBox()
@@ -20,16 +27,8 @@ function startGame() {
 }
 
 function countdown() {
-	var timeLeft = 30;
-
 	var timeInterval = setInterval(function () {
-		if (timeLeft === 0) {
-			clearInterval(timeInterval)
-			endGame()
-		}
-		// Output timeLeft to the console to double check 
-		console.log(timeLeft)
-
+		console.log("score", score)
 		if (timeLeft > 0) {
 			timerEl.textContent = `${timeLeft}`
 		}
@@ -37,6 +36,13 @@ function countdown() {
 		else {
 			timerEl.textContent = ""
 		}
+		if (timeLeft <= 0) {
+			clearInterval(timeInterval)
+			endGame()
+		}
+		// Output timeLeft to the console to double check 
+		console.log(timeLeft)
+
 		timeLeft = timeLeft - 1
 	}, 1000);
 }
@@ -49,6 +55,7 @@ function hideStart_btn() {
 	startButton.style.display = 'none';
 }
 
+// FIrst question
 function firstQuestion() {
 	var question = '1. How do you call a function named myFunction in JavaScript?'
 	startMsg.textContent = question;
@@ -64,29 +71,28 @@ function firstQuestion() {
   	while (buttonIndex  < buttonLength) {
     answerButton[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
-
-	answerButton[0].addEventListener('click', secondQuestion)
-	answerButton[0].addEventListener('click', correctOrWrongZero)
-	answerButton[1].addEventListener('click', secondQuestion)
-	answerButton[1].addEventListener('click', correctOrWrongOne)
-	answerButton[2].addEventListener('click', secondQuestion)
-	answerButton[2].addEventListener('click', correctOrWrongTwo)
-	answerButton[3].addEventListener('click', secondQuestion)
-	answerButton[3].addEventListener('click', correctOrWrongThree)
 	}
 
-	function correctOrWrongZero() {
+	answerButton[0].addEventListener('click', function(){
+		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongOne() {
+		timeLeft=timeLeft - 10})
+
+	answerButton[1].addEventListener('click', function(){
+		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongTwo() {
+		timeLeft=timeLeft - 10})
+
+	answerButton[2].addEventListener('click', function(){
+		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongThree() {
+		timeLeft=timeLeft - 10})
+
+	answerButton[3].addEventListener('click', function(){
+		secondQuestion()
 		isCorrect.textContent = "Correct!"
-	}
+		score = score + 1
+	})
 }
 
 // Second question
@@ -129,7 +135,6 @@ function secondQuestion() {
 		isCorrect.textContent = "Wrong!"
 	}
 }
-
 
 // Third question
 function thirdQuestion() {
@@ -251,12 +256,13 @@ function fifthQuestion() {
 	}	
 }
 
-// When the timer reaches 0---------------
+// Game ends when the timer reaches 0---------------
 function endGame() {
 	var doneMessage = "Time is up!";
 	startMsg.textContent = doneMessage;
 	answerBoxEl.style.display = "none";
 	displayInitial_box()
+	displayScore()
 	// Save initials and score
 	var initialsInput = document.querySelector('#initials');
 	var submitButton = document.querySelector('#submit');
@@ -276,6 +282,7 @@ function endGame() {
 function initialsInputPage() {
 	displayInitial_box()
 	hideQuestionAndAnswer()
+	displayScore()
 	// Save initials and score
 	var initialsInput = document.querySelector('#initials');
 	var submitButton = document.querySelector('#submit');
@@ -299,6 +306,10 @@ function hideQuestionAndAnswer() {
 function displayInitial_box() {
 	initialBoxEl.style.display = 'block';
 }
+
+function displayScore() {
+	totalScore.textContent = score;
+}
 //---------------
 
 // Record page---------------
@@ -307,6 +318,7 @@ function recordPage () {
 	hideInitialBox()
 	renderInitials()
 	displayInitialsAndScoreBox()
+	isCorrect.textContent = "";
 	var yourRecord = "Your initials and score";
 	startMsg.textContent = yourRecord;
 }
@@ -365,5 +377,15 @@ function hideGoBackAndClear_btn () {
 function hideInitialsAndScoreBox (){
 	initialsAndScoreBoxEl.style.display = "none"
 }
+//---------------
+
+// Score---------------
+// let score = 0;
+//let something =  question.questionLength??
+//while(score < questionLength)
+
+// if statement???
+
+//   console.log(score)
 //---------------
 
