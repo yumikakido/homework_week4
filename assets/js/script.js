@@ -6,12 +6,20 @@ var answerButton = document.getElementsByClassName('btn');
 var goBackButton = document.getElementById('goBack_btn');
 var clearButton = document.getElementById('clear_btn');
 var initialsAndScoreBoxEl = document.getElementById('initialsAndScore_box');
+var startMsg = document.getElementById('start_msg');
 var isCorrect = document.getElementById('correct');
+var totalScore = document.getElementById('score');
+
+var timeLeft = 30;
+var score = 0; 
 
 // Game starts(= timer starts, questions are displayed and start_msg disappears) when start_btn is clicked
 startButton.addEventListener('click', startGame)
 
 function startGame() {
+	timeLeft = 30
+	score = 0
+	timerEl.textContent = `${timeLeft}`
 	countdown()
 	firstQuestion()
 	displayAnswerBox()
@@ -19,15 +27,8 @@ function startGame() {
 }
 
 function countdown() {
-	var timeLeft = 60;
-
 	var timeInterval = setInterval(function () {
-		if (timeLeft === 0) {
-			clearInterval(timeInterval)
-		}
-		// Output timeLeft to the console to double check 
-		console.log(timeLeft)
-
+		console.log("score", score)
 		if (timeLeft > 0) {
 			timerEl.textContent = `${timeLeft}`
 		}
@@ -35,6 +36,13 @@ function countdown() {
 		else {
 			timerEl.textContent = ""
 		}
+		if (timeLeft <= 0) {
+			clearInterval(timeInterval)
+			endGame()
+		}
+		// Output timeLeft to the console to double check 
+		console.log(timeLeft)
+
 		timeLeft = timeLeft - 1
 	}, 1000);
 }
@@ -47,9 +55,10 @@ function hideStart_btn() {
 	startButton.style.display = 'none';
 }
 
+// FIrst question
 function firstQuestion() {
 	var question = '1. How do you call a function named myFunction in JavaScript?'
-	document.getElementById('start_msg').textContent = question;
+	startMsg.textContent = question;
 	const answers = [
 		'1. call myFunction()',
 		'2. console.log(myFunction)',
@@ -57,22 +66,39 @@ function firstQuestion() {
 		'4. myFunction()'
 	]
 
-	answerButton[0].textContent = answers[0];
-	answerButton[1].textContent = answers[1];
-	answerButton[2].textContent = answers[2];
-	answerButton[3].textContent = answers[3];
+	let buttonIndex = 0;
+  	let buttonLength = answerButton.length;
+  	while (buttonIndex  < buttonLength) {
+    answerButton[buttonIndex].textContent = answers[buttonIndex];
+    buttonIndex++;
+	}
 
-	answerButton[0].addEventListener('click', secondQuestion)
-	answerButton[1].addEventListener('click', secondQuestion)
-	answerButton[2].addEventListener('click', secondQuestion)
-	answerButton[3].addEventListener('click', secondQuestion)
+	answerButton[0].addEventListener('click', function(){
+		secondQuestion()
+		isCorrect.textContent = "Wrong!"
+		timeLeft=timeLeft - 10})
+
+	answerButton[1].addEventListener('click', function(){
+		secondQuestion()
+		isCorrect.textContent = "Wrong!"
+		timeLeft=timeLeft - 10})
+
+	answerButton[2].addEventListener('click', function(){
+		secondQuestion()
+		isCorrect.textContent = "Wrong!"
+		timeLeft=timeLeft - 10})
+
+	answerButton[3].addEventListener('click', function(){
+		secondQuestion()
+		isCorrect.textContent = "Correct!"
+		score = score + 1
+	})
 }
 
 // Second question
-function secondQuestion(correctOrWrong) {
+function secondQuestion() {
 	var question = '2. How do you write “Hello World” in an alert box in JavaScrip?'
-	document.getElementById('start_msg').textContent = question;
-	// isCorrect.textContent = correctOrWrong;
+	startMsg.textContent = question;
 
 	const answers = [
 		'1. console.log("Hello World)',
@@ -80,44 +106,82 @@ function secondQuestion(correctOrWrong) {
 		'3. alert.log("Hello World")',
 		'4. console.text("Hello World")'
 	]
-	answerButton[0].textContent = answers[0];
-	answerButton[1].textContent = answers[1];
-	answerButton[2].textContent = answers[2];
-	answerButton[3].textContent = answers[3];
+	let buttonIndex = 0;
+  	let buttonLength = answerButton.length;
+  	while (buttonIndex  < buttonLength) {
+    answerButton[buttonIndex].textContent = answers[buttonIndex];
+    buttonIndex++;
 
 	answerButton[0].addEventListener('click', thirdQuestion)
+	answerButton[0].addEventListener('click', correctOrWrongZero)
 	answerButton[1].addEventListener('click', thirdQuestion)
+	answerButton[1].addEventListener('click', correctOrWrongOne)
 	answerButton[2].addEventListener('click', thirdQuestion)
+	answerButton[2].addEventListener('click', correctOrWrongTwo)
 	answerButton[3].addEventListener('click', thirdQuestion)
+	answerButton[3].addEventListener('click', correctOrWrongThree)
+	}
+
+	function correctOrWrongZero() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongOne() {
+		isCorrect.textContent = "Correct!"
+	}
+	function correctOrWrongTwo() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongThree() {
+		isCorrect.textContent = "Wrong!"
+	}
 }
 
 // Third question
 function thirdQuestion() {
 	var question = '3. How do you add a comment in JavaScript??'
-	document.getElementById('start_msg').textContent = question;
-	// isCorrect.textContent = correctOrWrong;
+	startMsg.textContent = question;
+	
 	const answers = [
 		'1. /*This is a comment*/ ',
 		'2. <! — This is a comment —>',
 		'3. **This is a comment**',
 		'4. // This is a comment'
 	]
-	answerButton[0].textContent = answers[0];
-	answerButton[1].textContent = answers[1];
-	answerButton[2].textContent = answers[2];
-	answerButton[3].textContent = answers[3];
+	let buttonIndex = 0;
+  	let buttonLength = answerButton.length;
+  	while (buttonIndex  < buttonLength) {
+    answerButton[buttonIndex].textContent = answers[buttonIndex];
+    buttonIndex++;
 
 	answerButton[0].addEventListener('click', fourthQuestion)
+	answerButton[0].addEventListener('click', correctOrWrongZero)
 	answerButton[1].addEventListener('click', fourthQuestion)
+	answerButton[1].addEventListener('click', correctOrWrongOne)
 	answerButton[2].addEventListener('click', fourthQuestion)
+	answerButton[2].addEventListener('click', correctOrWrongTwo)
 	answerButton[3].addEventListener('click', fourthQuestion)
+	answerButton[3].addEventListener('click', correctOrWrongThree)
+	}
+
+	function correctOrWrongZero() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongOne() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongTwo() {
+		isCorrect.extContent = "Wrong!"
+	}
+	function correctOrWrongThree() {
+		isCorrect.textContent = "Correct!"
+	}
 }
 
 // Fourth question
 function fourthQuestion() {
 	var question= '4. What does CSS stands for?'
-	document.getElementById('start_msg').textContent = question;
-	// isCorrect.textContent = correctOrWrong;
+	startMsg.textContent = question;
+	
 	const answers = [
 		'1. Cascading Standard Sheets',
 		'2. Color Style Sheets',
@@ -130,38 +194,96 @@ function fourthQuestion() {
 	answerButton[3].textContent = answers[3];
 
 	answerButton[0].addEventListener('click', fifthQuestion)
+	answerButton[0].addEventListener('click', correctOrWrongZero)
 	answerButton[1].addEventListener('click', fifthQuestion)
+	answerButton[1].addEventListener('click', correctOrWrongOne)
 	answerButton[2].addEventListener('click', fifthQuestion)
+	answerButton[2].addEventListener('click', correctOrWrongTwo)
 	answerButton[3].addEventListener('click', fifthQuestion)
+	answerButton[3].addEventListener('click', correctOrWrongThree)
+
+	function correctOrWrongZero() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongOne() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongTwo() {
+		isCorrect.textContent = "Correct!"
+	}
+	function correctOrWrongThree() {
+		isCorrect.textContent = "Correct!"
+	}	
 }
 
 // Fifth question
 function fifthQuestion() {
 	var question= '5. Choose the correct HTML element to insert a line break;'
-	document.getElementById('start_msg').textContent = question;
-	// isCorrect.textContent = correctOrWrong;
+	startMsg.textContent = question;
+	
 	const answers = [
 		'1. <line br>',
 		'2. <br>',
 		'3. <line>',
 		'4. <break>'
 	]
-	answerButton[0].textContent = answers[0];
-	answerButton[1].textContent = answers[1];
-	answerButton[2].textContent = answers[2];
-	answerButton[3].textContent = answers[3];
+	let buttonIndex = 0;
+  	let buttonLength = answerButton.length;
+  	while (buttonIndex  < buttonLength) {
+    answerButton[buttonIndex].textContent = answers[buttonIndex];
+    buttonIndex++;
 
 	answerButton[0].addEventListener('click', initialsInputPage)
+	answerButton[0].addEventListener('click', correctOrWrongZero)
 	answerButton[1].addEventListener('click', initialsInputPage)
+	answerButton[1].addEventListener('click', correctOrWrongOne)	
 	answerButton[2].addEventListener('click', initialsInputPage)
+	answerButton[2].addEventListener('click', correctOrWrongTwo)
 	answerButton[3].addEventListener('click', initialsInputPage)
+	answerButton[3].addEventListener('click', correctOrWrongThree)	
+	}
+	function correctOrWrongZero() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongOne() {
+		isCorrect.textContent = "Correct!"
+	}
+	function correctOrWrongTwo() {
+		isCorrect.textContent = "Wrong!"
+	}
+	function correctOrWrongThree() {
+		isCorrect.textContent = "Wrong!"
+	}	
 }
 
-//initialInput page
+// Game ends when the timer reaches 0---------------
+function endGame() {
+	var doneMessage = "Time is up!";
+	startMsg.textContent = doneMessage;
+	answerBoxEl.style.display = "none";
+	displayInitial_box()
+	displayScore()
+	// Save initials and score
+	var initialsInput = document.querySelector('#initials');
+	var submitButton = document.querySelector('#submit');
+
+	submitButton.addEventListener('click', function (event) {
+	event.preventDefault();
+
+	var playerInitials = initialsInput.value
+	localStorage.setItem('player', playerInitials)
+
+	recordPage()
+	});
+}
+//---------------
+
+//initialInput page---------------
 function initialsInputPage() {
 	displayInitial_box()
 	hideQuestionAndAnswer()
-	// Save initials and score when game is over 
+	displayScore()
+	// Save initials and score
 	var initialsInput = document.querySelector('#initials');
 	var submitButton = document.querySelector('#submit');
 
@@ -177,7 +299,7 @@ function initialsInputPage() {
 
 function hideQuestionAndAnswer() {
 	var doneMessage = "All done!";
-	document.getElementById('start_msg').textContent = doneMessage;
+	startMsg.textContent = doneMessage;
 	answerBoxEl.style.display = "none";
 }
 
@@ -185,14 +307,20 @@ function displayInitial_box() {
 	initialBoxEl.style.display = 'block';
 }
 
-// Record page
+function displayScore() {
+	totalScore.textContent = score;
+}
+//---------------
+
+// Record page---------------
 function recordPage () {
 	displayGoBackAndClear_btn()
 	hideInitialBox()
 	renderInitials()
 	displayInitialsAndScoreBox()
-	var yourRecord = "Your initials and record";
-	document.getElementById('start_msg').textContent = yourRecord;
+	isCorrect.textContent = "";
+	var yourRecord = "Your initials and score";
+	startMsg.textContent = yourRecord;
 }
 
 function hideInitialBox () {
@@ -208,7 +336,6 @@ function displayGoBackAndClear_btn() {
 	clearButton.style.display = 'inline-block';
 }
 
-
 function renderInitials() {
   var Initials = localStorage.getItem("player");
   initialsAndScoreBoxEl.textContent = Initials;
@@ -217,3 +344,48 @@ function renderInitials() {
     return;
   }
 }
+//---------------
+
+// Clear history---------------
+clearButton.addEventListener('click', clearHistory)
+
+function clearHistory() {
+	localStorage.removeItem("player");
+	initialsAndScoreBoxEl.textContent = "";
+  }
+//---------------
+
+// Go back to the start page---------------
+goBackButton.addEventListener('click', goBackToStart)
+
+function goBackToStart() {
+	startMsg.textContent = "Try to answer the following code-related questions within 30 seconds. Please keep in mind that incorrect answers will penalize your score/time by 10 seconds. If you are ready, click on 'Start quiz'!"
+	displayStart_btn()
+	hideGoBackAndClear_btn()
+	hideInitialsAndScoreBox()
+  }
+
+  function displayStart_btn() {
+	startButton.style.display = 'inline-block';
+}
+
+function hideGoBackAndClear_btn () {
+	goBackButton.style.display = 'none';
+	clearButton.style.display = 'none';
+}
+
+function hideInitialsAndScoreBox (){
+	initialsAndScoreBoxEl.style.display = "none"
+}
+//---------------
+
+// Score---------------
+// let score = 0;
+//let something =  question.questionLength??
+//while(score < questionLength)
+
+// if statement???
+
+//   console.log(score)
+//---------------
+
