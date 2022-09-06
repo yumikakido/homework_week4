@@ -125,34 +125,11 @@ header {
   padding: 14px 24px;
   text-align: left;
   cursor: pointer;
-  width: 400px;
+  width: 300px;
 }
 
 #answer_btn:hover {
   background: #35a0fd
-}
-
-/* .option_list {
- padding-left: 60px;
- padding-top: 20px;
-} */
-
-/* .option_list .option {
-  font-size: 15px;
-  background: aliceblue;
-  border: 1px solid #84c5fe;
-  border-radius: 5px;
-  padding: 8px 15px;
-  margin-bottom: 15px;
-  justify-content: space-between;
-  cursor: pointer;
-  width: 500px;
-  text-align: left;
-} */
-
-
-.option:last-child {
-  margin-bottom: 0px;
 }
 
 #start_btn {
@@ -170,16 +147,37 @@ header {
   cursor: pointer;
 }
 
+#initialsAndScore_box {
+    padding: 8px;
+    font-size: 14px;
+    border: solid 1px #000000;
+    display: none;
+}
+
+
 #goBack_btn {
   border: none;
   background-color: #0056b3;
   border-radius: 10px;
   color: hsl(0, 0%, 100%);
-  display: inline-block;
   font-size: 13px;
   font-weight: bold;
   line-height: 15px;
-  margin: 16px 16px 16px 20px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+}
+
+#clear_btn {
+  border: none;
+  background-color: #0056b3;
+  border-radius: 10px;
+  color: hsl(0, 0%, 100%);
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 15px;
   padding: 10px;
   text-align: center;
   cursor: pointer;
@@ -190,7 +188,7 @@ header {
   cursor: default;
 }
 
-.result_box {
+#initial_box {
   display: none;
 }
 
@@ -202,13 +200,10 @@ header {
     padding: 10px 15px;
   }
 
-  #password {
-    font-size: 1rem;
-  }
-}
-
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
   }
+}
+
 }

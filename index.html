@@ -24,31 +24,39 @@
           </header>
 
           <!-- section -->
-          <section id = main_section>
-            <p id = start_msg>Try to answer the following code-related questions within 60 seconds.<br>Please keep in mind that incorrect answers will penalize your score/time by 10 seconds.<br>If you are ready, click on "Start quiz"!</p> 
+          <section id = "main_section">
+            <p id = "start_msg">Try to answer the following code-related questions within 60 seconds.<br>Please keep in mind that incorrect answers will penalize your score/time by 10 seconds.<br>If you are ready, click on "Start quiz"!</p> 
             
             <!-- answer btn -->
-            <div id="answer_box">
+            <div id = "answer_box">
               <button type = "button" id="answer_btn" class="btn">1. Button</button>
               <button type = "button" id="answer_btn" class="btn">2. Button</button>
               <button type = "button" id="answer_btn" class="btn">3. Button</button>
               <button type = "button" id= "answer_btn" class="btn">4. Button</button>
             </div>
+
+            <!-- correct or wrong -->
+            <p id = "correct"></p>
+
             
              <!-- save initials and score -->
              <form method="POST">
-             <div class="result_box">
-                <div class="complete_text">All done! Your final score is:  </div>
+             <div id ="initial_box">
+                <div class="complete_text">Your final score is:  </div>
                 <label for="initials">Enter initials: </label><input type="text" name="initials" id="initials" placeholder="JD" />
                 <button id="submit">Submit</button>
               </div>
               </form>
               
             <!-- start button -->
-            <div class="Start_btn"><button id="start_btn" class="btn">Start quiz</button></div>
+            <div class="Start_btn"><button id="start_btn" class="btn2">Start quiz</button></div>
               
-            <!-- goBack button -->
-            <div class="GoBack_btn"><button id="goBack_btn" class="btn">Go back</button></div>
+            <!--  record page -->
+            <div class="record_page">
+              <div id = "initialsAndScore_box"></div>
+              <button id="goBack_btn" class="btn3">Go back</button>
+              <button id="clear_btn" class="btn4">Clear history</button>
+            </div>
 
           </section>
         </div>
