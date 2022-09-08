@@ -10,14 +10,15 @@ var startMsg = document.getElementById('start_msg');
 var isCorrect = document.getElementById('correct');
 var totalScore = document.getElementById('score');
 
-var timeLeft = 30;
+var timeLeft = 60;
 var score = 0; 
+var timeIntervalId;
 
 // Game starts(= timer starts, questions are displayed and start_msg disappears) when start_btn is clicked
 startButton.addEventListener('click', startGame)
 
 function startGame() {
-	timeLeft = 30
+	timeLeft = 60
 	score = 0
 	timerEl.textContent = `${timeLeft}`
 	countdown()
@@ -27,19 +28,22 @@ function startGame() {
 }
 
 function countdown() {
-	var timeInterval = setInterval(function () {
+	timeIntervalId = setInterval(function () {
+		// Output score to the console to double check
 		console.log("score", score)
 		if (timeLeft > 0) {
 			timerEl.textContent = `${timeLeft}`
 		}
-
+		
 		else {
 			timerEl.textContent = ""
 		}
+		
 		if (timeLeft <= 0) {
-			clearInterval(timeInterval)
+			clearInterval(timeIntervalId)
 			endGame()
 		}
+	
 		// Output timeLeft to the console to double check 
 		console.log(timeLeft)
 
@@ -55,20 +59,20 @@ function hideStart_btn() {
 	startButton.style.display = 'none';
 }
 
-// FIrst question
+// First question
 function firstQuestion() {
 	var question = '1. How do you call a function named myFunction in JavaScript?'
 	startMsg.textContent = question;
 	const answers = [
-		'1. call myFunction()',
-		'2. console.log(myFunction)',
-		'3. function myFunction()',
-		'4. myFunction()'
+		'1. call myFunction();',
+		'2. console.log(myFunction);',
+		'3. function myFunction();',
+		'4. myFunction();'
 	]
 
 	let buttonIndex = 0;
   	let buttonLength = answerButton.length;
-  	while (buttonIndex  < buttonLength) {
+  	while (buttonIndex < buttonLength) {
     answerButton[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
 	}
@@ -76,24 +80,27 @@ function firstQuestion() {
 	answerButton[0].addEventListener('click', function(){
 		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-		timeLeft=timeLeft - 10})
-
+		timeLeft = timeLeft - 10
+	})
+	
 	answerButton[1].addEventListener('click', function(){
 		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-		timeLeft=timeLeft - 10})
+		timeLeft = timeLeft - 10
+	})
 
 	answerButton[2].addEventListener('click', function(){
 		secondQuestion()
 		isCorrect.textContent = "Wrong!"
-		timeLeft=timeLeft - 10})
+		timeLeft = timeLeft - 10
+	})
 
 	answerButton[3].addEventListener('click', function(){
 		secondQuestion()
 		isCorrect.textContent = "Correct!"
 		score = score + 1
 	})
-}
+}	
 
 // Second question
 function secondQuestion() {
@@ -101,39 +108,43 @@ function secondQuestion() {
 	startMsg.textContent = question;
 
 	const answers = [
-		'1. console.log("Hello World)',
-		'2. alert("Hello World")',
-		'3. alert.log("Hello World")',
-		'4. console.text("Hello World")'
+		'1. console.log("Hello World);',
+		'2. alert("Hello World");',
+		'3. alert.log("Hello World");',
+		'4. console.text("Hello World");'
 	]
+
 	let buttonIndex = 0;
   	let buttonLength = answerButton.length;
-  	while (buttonIndex  < buttonLength) {
+  	while (buttonIndex < buttonLength) {
     answerButton[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
-
-	answerButton[0].addEventListener('click', thirdQuestion)
-	answerButton[0].addEventListener('click', correctOrWrongZero)
-	answerButton[1].addEventListener('click', thirdQuestion)
-	answerButton[1].addEventListener('click', correctOrWrongOne)
-	answerButton[2].addEventListener('click', thirdQuestion)
-	answerButton[2].addEventListener('click', correctOrWrongTwo)
-	answerButton[3].addEventListener('click', thirdQuestion)
-	answerButton[3].addEventListener('click', correctOrWrongThree)
 	}
 
-	function correctOrWrongZero() {
+	answerButton[0].addEventListener('click', function(){
+		thirdQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongOne() {
+		//timeLeft = timeLeft - 10
+	})
+
+	answerButton[1].addEventListener('click', function(){
+		thirdQuestion()
 		isCorrect.textContent = "Correct!"
-	}
-	function correctOrWrongTwo() {
+		score = score + 1
+	})
+
+	answerButton[2].addEventListener('click', function(){
+		thirdQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongThree() {
+		//timeLeft = timeLeft - 10
+	})
+	
+	answerButton[3].addEventListener('click', function(){
+		thirdQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
+		//timeLeft = timeLeft - 10
+	})
+	
 }
 
 // Third question
@@ -142,39 +153,39 @@ function thirdQuestion() {
 	startMsg.textContent = question;
 	
 	const answers = [
-		'1. /*This is a comment*/ ',
+		'1. // This is a comment',
 		'2. <! — This is a comment —>',
 		'3. **This is a comment**',
-		'4. // This is a comment'
+		'4. /*This is a comment*/ '
 	]
+
 	let buttonIndex = 0;
   	let buttonLength = answerButton.length;
-  	while (buttonIndex  < buttonLength) {
+  	while (buttonIndex < buttonLength) {
     answerButton[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
-
-	answerButton[0].addEventListener('click', fourthQuestion)
-	answerButton[0].addEventListener('click', correctOrWrongZero)
-	answerButton[1].addEventListener('click', fourthQuestion)
-	answerButton[1].addEventListener('click', correctOrWrongOne)
-	answerButton[2].addEventListener('click', fourthQuestion)
-	answerButton[2].addEventListener('click', correctOrWrongTwo)
-	answerButton[3].addEventListener('click', fourthQuestion)
-	answerButton[3].addEventListener('click', correctOrWrongThree)
 	}
-
-	function correctOrWrongZero() {
-		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongOne() {
-		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongTwo() {
-		isCorrect.extContent = "Wrong!"
-	}
-	function correctOrWrongThree() {
+	
+	answerButton[0].addEventListener('click', function(){
+		fourthQuestion()
 		isCorrect.textContent = "Correct!"
-	}
+		score = score + 1
+	})
+
+	answerButton[1].addEventListener('click', function(){
+		fourthQuestion()
+		isCorrect.textContent = "Wrong!"
+	})
+	
+	answerButton[2].addEventListener('click', function(){
+		fourthQuestion()
+		isCorrect.textContent = "Wrong!"
+	})
+
+	answerButton[3].addEventListener('click', function(){
+		fourthQuestion()
+		isCorrect.textContent = "Wrong!"
+	})
 }
 
 // Fourth question
@@ -188,32 +199,34 @@ function fourthQuestion() {
 		'3. Cascading Style Sheets',
 		'4. Computer Standard Sheets'
 	]
-	answerButton[0].textContent = answers[0];
-	answerButton[1].textContent = answers[1];
-	answerButton[2].textContent = answers[2];
-	answerButton[3].textContent = answers[3];
 
-	answerButton[0].addEventListener('click', fifthQuestion)
-	answerButton[0].addEventListener('click', correctOrWrongZero)
-	answerButton[1].addEventListener('click', fifthQuestion)
-	answerButton[1].addEventListener('click', correctOrWrongOne)
-	answerButton[2].addEventListener('click', fifthQuestion)
-	answerButton[2].addEventListener('click', correctOrWrongTwo)
-	answerButton[3].addEventListener('click', fifthQuestion)
-	answerButton[3].addEventListener('click', correctOrWrongThree)
+	let buttonIndex = 0;
+  	let buttonLength = answerButton.length;
+  	while (buttonIndex < buttonLength) {
+    answerButton[buttonIndex].textContent = answers[buttonIndex];
+    buttonIndex++;
+	}
 
-	function correctOrWrongZero() {
+	answerButton[0].addEventListener('click', function(){
+		fifthQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongOne() {
+	})
+
+	answerButton[1].addEventListener('click', function(){
+		fifthQuestion()
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongTwo() {
+	})
+
+	answerButton[2].addEventListener('click', function(){
+		fifthQuestion()
 		isCorrect.textContent = "Correct!"
-	}
-	function correctOrWrongThree() {
-		isCorrect.textContent = "Correct!"
-	}	
+		score = score + 1
+	})
+
+	answerButton[3].addEventListener('click', function(){
+		fifthQuestion()
+		isCorrect.textContent = "Wrong!"
+	})
 }
 
 // Fifth question
@@ -227,34 +240,43 @@ function fifthQuestion() {
 		'3. <line>',
 		'4. <break>'
 	]
+
 	let buttonIndex = 0;
   	let buttonLength = answerButton.length;
-  	while (buttonIndex  < buttonLength) {
+  	while (buttonIndex < buttonLength) {
     answerButton[buttonIndex].textContent = answers[buttonIndex];
     buttonIndex++;
+	}
+	
+	answerButton[0].addEventListener('click', function(){
+		isCorrect.textContent = "Wrong!"
+		initialsInputPage()
+		stopTimer()
+	})
 
-	answerButton[0].addEventListener('click', initialsInputPage)
-	answerButton[0].addEventListener('click', correctOrWrongZero)
-	answerButton[1].addEventListener('click', initialsInputPage)
-	answerButton[1].addEventListener('click', correctOrWrongOne)	
-	answerButton[2].addEventListener('click', initialsInputPage)
-	answerButton[2].addEventListener('click', correctOrWrongTwo)
-	answerButton[3].addEventListener('click', initialsInputPage)
-	answerButton[3].addEventListener('click', correctOrWrongThree)	
-	}
-	function correctOrWrongZero() {
-		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongOne() {
+	answerButton[1].addEventListener('click', function(){
 		isCorrect.textContent = "Correct!"
-	}
-	function correctOrWrongTwo() {
+		score = score + 1
+		initialsInputPage()
+		stopTimer()
+	})
+
+	answerButton[2].addEventListener('click', function(){
 		isCorrect.textContent = "Wrong!"
-	}
-	function correctOrWrongThree() {
+		initialsInputPage()
+		stopTimer()
+	})
+
+	answerButton[3].addEventListener('click', function(){
 		isCorrect.textContent = "Wrong!"
-	}	
+		initialsInputPage()
+		stopTimer()
+	})
 }
+
+function stopTimer() {
+		clearInterval(timeIntervalId);
+	  }
 
 // Game ends when the timer reaches 0---------------
 function endGame() {
@@ -277,6 +299,10 @@ function endGame() {
 	});
 }
 //---------------
+
+function displayScore() {
+	totalScore.textContent = score;
+}
 
 //initialInput page---------------
 function initialsInputPage() {
@@ -305,10 +331,6 @@ function hideQuestionAndAnswer() {
 
 function displayInitial_box() {
 	initialBoxEl.style.display = 'block';
-}
-
-function displayScore() {
-	totalScore.textContent = score;
 }
 //---------------
 
@@ -359,7 +381,7 @@ function clearHistory() {
 goBackButton.addEventListener('click', goBackToStart)
 
 function goBackToStart() {
-	startMsg.textContent = "Try to answer the following code-related questions within 30 seconds. Please keep in mind that incorrect answers will penalize your score/time by 10 seconds. If you are ready, click on 'Start quiz'!"
+	startMsg.textContent = "Try to answer the following code-related questions within 60 seconds. There will be 5 questions (1 point each). Keep in mind that incorrect answers will penalize your time by 10 seconds. If you are ready, click on 'Start quiz'!"
 	displayStart_btn()
 	hideGoBackAndClear_btn()
 	hideInitialsAndScoreBox()
@@ -377,15 +399,5 @@ function hideGoBackAndClear_btn () {
 function hideInitialsAndScoreBox (){
 	initialsAndScoreBoxEl.style.display = "none"
 }
-//---------------
-
-// Score---------------
-// let score = 0;
-//let something =  question.questionLength??
-//while(score < questionLength)
-
-// if statement???
-
-//   console.log(score)
 //---------------
 
