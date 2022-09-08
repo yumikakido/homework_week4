@@ -128,6 +128,10 @@ header {
   background: #35a0fd
 }
 
+.complete_text {
+  text-decoration: underline;
+}
+
 #start_btn {
   border: none;
   background-color: #0056b3;
